@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <Script>
+        function Pattern(){
+            var P=parseInt(document.getElementById("n1").value);
+            var result="";
+            for(let i=0;i<P;i++){
+                for(let j=0;j<=i;j++){
+                    result+= "*";
+                }
+                        result+="<br>";
+            }
+            document.getElementById("Pattern1").innerHTML=result;
+        }
+    </Script>
+</head>
+<body>
+    Enter no of rows <input type="number" id="n1">
+    <br><br>
+    <button onclick="Pattern()">Print</button>
+    <br><br>
+    <div id="Pattern1"></div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script>
+        function Palindrome(){
+        var S=document.getElementById("n1").value;
+        let result="Its an Palindrome";
+        S=S.toLowerCase(); 
+        for(let i=0;i<S.length/2; i++){    
+            if(S.charAt(i) !=S.charAt(S.length-i-1)){ 
+                result="Not an palindrome";
+                break;
+          }
+          }
+        document.getElementById("Palindrome1").innerHTML=result;
+    }   
+    </script>
+</head>
+<body>
+    Enter the String <input type="text" name="" id="n1">
+    <br><br>
+    <button onclick="Palindrome()">Check</button>
+    <br>
+    <div id="Palindrome1"></div>
+</body>
+</html>
