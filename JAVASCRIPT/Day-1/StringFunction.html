@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script>
+        function String(){
+            var S=document.getElementById("n1").value;
+            let result = `String Length       : ${S.length}<br>
+                          String charAt()     : ${S.charAt(2)}<br>
+                          String Slice()      : ${S.slice(2, 4)}<br>
+                          String Substring()  : ${S.substring(2, 4)}<br>
+                          String Substr()     : ${S.substr(2, 4)}<br>
+                          String toUpperCase(): ${S.toUpperCase()}<br>
+                          String toLowerCase  : ${S.toLowerCase()}<br>
+                          String Concat()     : ${S.concat(' World')}<br>
+                          String trim()       : ${S.trim()}<br>
+                          String trimStart()  : ${S.trimStart()}<br>
+                          String trimEnd()    : ${S.trimEnd()}<br>
+                          String repeat()     : ${S.repeat(2)}<br>
+                          String replace()    : ${S.replace('a', 'n')}<br>
+                          String replaceAll() : ${S.replaceAll('a', 'n')}<br>
+                          String split()      : ${S.split(' ').join(',')}<br>
+                `;
+        document.getElementById("String1").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    Enter the String <input type="text" name="" id="n1" onfocus="this.value=''">
+    <br><br>
+    <button onclick="String()">Print</button>
+    <br>
+    <div id="String1"></div>
+</body>
+</html>
