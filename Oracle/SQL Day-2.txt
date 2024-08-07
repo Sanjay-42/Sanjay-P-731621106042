@@ -1,0 +1,538 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Aug 7 14:13:03 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> create table employee(id number(10),name varchar2(20),salary number(15));
+
+Table created.
+
+SQL> insert into employee values(101,'Sanjay',20000);
+
+1 row created.
+
+SQL> insert into employee values(102,'Praveen',40000);
+
+1 row created.
+
+SQL> insert into employee values(103,'Mani',30000);
+
+1 row created.
+
+SQL> insert into employee values(104,'Ganesh',35000);
+
+1 row created.
+
+SQL> insert into employee values(105,'Ajay',45000);
+
+1 row created.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+
+SQL> select * from employee where id in(101,103,105);
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       103 Mani                      30000
+       105 Ajay                      45000
+
+SQL> select * from employee where id not in(101,103,105);
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       102 Praveen                   40000
+       104 Ganesh                    35000
+
+SQL> select * from employee where salary between 30000 and 45000;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+
+SQL> select * from employee where salary not between 30000 and 45000;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+
+SQL> select * from employee where salary not between 2000 and 40000;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       105 Ajay                      45000
+
+SQL> select * from employee where id in (101,102,105) and salary>25000;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       102 Praveen                   40000
+       105 Ajay                      45000
+
+SQL> select * from employee where id in (101,102,105) or salary>25000;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+
+SQL> select * from employee where id>103 and salary<30000;
+
+no rows selected
+
+SQL> select * from employee where id>103 or salary<30000;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+
+SQL> insert into employee(id,salary)values(106,49000);
+
+1 row created.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106                           49000
+
+6 rows selected.
+
+SQL> update employee set name='vijay'where id=106;
+
+1 row updated.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+
+6 rows selected.
+
+SQL> insert into employee(id,salary)values(107,49000);
+
+1 row created.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> select * from employee where name is null;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       107                           49000
+
+SQL> select * from employee where name is not null;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+
+6 rows selected.
+
+SQL> select * from employee where name like 's%';
+
+no rows selected
+
+SQL> select * from employee where name like 'S%';
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+
+SQL> select * from employee where name like '%y';
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       105 Ajay                      45000
+       106 vijay                     49000
+
+SQL> select * from employee where name like '_a';
+
+no rows selected
+
+SQL> select * from employee where name like '_a%';
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       103 Mani                      30000
+       104 Ganesh                    35000
+
+SQL> select * from employee where name not like '%y';
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+
+SQL> select * from employee order;
+select * from employee order
+                           *
+ERROR at line 1:
+ORA-00924: missing BY keyword
+
+
+SQL> select * from employee order by id;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> select * from employee order by id desc;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       107                           49000
+       106 vijay                     49000
+       105 Ajay                      45000
+       104 Ganesh                    35000
+       103 Mani                      30000
+       102 Praveen                   40000
+       101 Sanjay                    20000
+
+7 rows selected.
+
+SQL> select * from employee order by name desc;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       107                           49000
+       106 vijay                     49000
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+
+7 rows selected.
+
+SQL> select * from employee order by name;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       105 Ajay                      45000
+       104 Ganesh                    35000
+       103 Mani                      30000
+       102 Praveen                   40000
+       101 Sanjay                    20000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> select * from employee order by salary;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       102 Praveen                   40000
+       105 Ajay                      45000
+       107                           49000
+       106 vijay                     49000
+
+7 rows selected.
+
+SQL> select * from employee order by salary desc;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       106 vijay                     49000
+       107                           49000
+       105 Ajay                      45000
+       102 Praveen                   40000
+       104 Ganesh                    35000
+       103 Mani                      30000
+       101 Sanjay                    20000
+
+7 rows selected.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> alter table employee add doj date;
+
+Table altered.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY DOJ
+---------- -------------------- ---------- ---------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> update employee set doj=sysdate where id=104;
+
+1 row updated.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY DOJ
+---------- -------------------- ---------- ---------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000 07-AUG-24
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> update employee set doj='02-Aug-24' where id in(101,103,107);
+
+3 rows updated.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY DOJ
+---------- -------------------- ---------- ---------
+       101 Sanjay                    20000 02-AUG-24
+       102 Praveen                   40000
+       103 Mani                      30000 02-AUG-24
+       104 Ganesh                    35000 07-AUG-24
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000 02-AUG-24
+
+7 rows selected.
+
+SQL> update employee set doj='05-Aug-24' where id in(102,106);
+
+2 rows updated.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY DOJ
+---------- -------------------- ---------- ---------
+       101 Sanjay                    20000 02-AUG-24
+       102 Praveen                   40000 05-AUG-24
+       103 Mani                      30000 02-AUG-24
+       104 Ganesh                    35000 07-AUG-24
+       105 Ajay                      45000
+       106 vijay                     49000 05-AUG-24
+       107                           49000 02-AUG-24
+
+7 rows selected.
+
+SQL> update employee set doj='03-Aug-24' where id=105;
+
+1 row updated.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY DOJ
+---------- -------------------- ---------- ---------
+       101 Sanjay                    20000 02-AUG-24
+       102 Praveen                   40000 05-AUG-24
+       103 Mani                      30000 02-AUG-24
+       104 Ganesh                    35000 07-AUG-24
+       105 Ajay                      45000 03-AUG-24
+       106 vijay                     49000 05-AUG-24
+       107                           49000 02-AUG-24
+
+7 rows selected.
+
+SQL> alter table employee drop column doj;
+
+Table altered.
+
+SQL> select * from employee;
+
+        ID NAME                     SALARY
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER(10)
+ NAME                                               VARCHAR2(20)
+ SALARY                                             NUMBER(15)
+
+SQL> alter table employee modify salary number(7);
+alter table employee modify salary number(7)
+                            *
+ERROR at line 1:
+ORA-01440: column to be modified must be empty to decrease precision or scale
+
+
+SQL> alter table employee modify salary number(20);
+
+Table altered.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER(10)
+ NAME                                               VARCHAR2(20)
+ SALARY                                             NUMBER(20)
+
+SQL> alter table rename column salary amount;
+alter table rename column salary amount
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> alter table rename column salary to amount;
+alter table rename column salary to amount
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> alter table employee rename column 'salary' to 'amount';
+alter table employee rename column 'salary' to 'amount'
+                                   *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table employee rename column salary to amount;
+
+Table altered.
+
+SQL> select * from employee;
+
+        ID NAME                     AMOUNT
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
+
+SQL> alter table employee to workers;
+alter table employee to workers
+                     *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table employee rename employee to workers;
+alter table employee rename employee to workers
+                            *
+ERROR at line 1:
+ORA-14155: missing PARTITION or SUBPARTITION keyword
+
+
+SQL> alter table rename employee to workers;
+alter table rename employee to workers
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> rename table employee to worker;
+rename table employee to worker
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> rename employee to worker;
+
+Table renamed.
+
+SQL> select * from worker;
+
+        ID NAME                     AMOUNT
+---------- -------------------- ----------
+       101 Sanjay                    20000
+       102 Praveen                   40000
+       103 Mani                      30000
+       104 Ganesh                    35000
+       105 Ajay                      45000
+       106 vijay                     49000
+       107                           49000
+
+7 rows selected.
